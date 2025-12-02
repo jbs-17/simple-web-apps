@@ -1,43 +1,268 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+
+:root {
+	--base-color: rgb(224, 217, 212);
+	--base-color-2: rgb(180, 176, 173);
+}
+
+body {
+	font-size: 11.3px;
+	background-color: var(--base-color);
+
+}
+
+
+.container {
+
+}
+
+input#extends-calc {
+    position: absolute;
+    opacity: 0; 
+    pointer-events: none;
+    z-index: -1;
+}
+
+input#extends-calc:checked~section[role="input"] {
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(7, 1fr);
+	grid-template-areas:
+		"sym-t sym-t sym-t sym-t sym-t"
+		"sym-t sym-t sym-t sym-t sym-t"
+		"sym-r op-top op-top op-top op-left"
+		"sym-r num num num op-left"
+		"sym-r num num num op-left"
+		"sym-r num num num op-left"
+		"sym-r num num num op-left";
+}
+
+input#extends-calc:not(:checked)~section[role="input"] div.sym-t, input#extends-calc:not(:checked)~section[role="input"] div.sym-r {
+	display: none;
+}
+
+
+
+
+section[role="input"] {
+	width: 100%;
+	height: 64vh;
+
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	display: grid;
+
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	grid-template-areas:
+		"op-top op-top op-top op-left"
+		"num num num op-left"
+		"num num num op-left"
+		"num num num op-left"
+		"num num num op-left";
+}
+
+
+
+
+div.number {
+	display: grid;
+	grid-area: num;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	/* TAMBAHAN: Atur 4 baris untuk tombol angka */
+}
+
+div.sym-t {
+	display: grid;
+	grid-area: sym-t;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+
+}
+
+div.sym-r {
+	display: grid;
+	grid-area: sym-r;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, 1fr);
+}
+
+div.op-left {
+	display: grid;
+	grid-area: op-left;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, 1fr);
+}
+
+div.op-top {
+	display: grid;
+	grid-area: op-top;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 1fr;
+}
+
+section[role="input"] button {
+	box-sizing: border-box;
+
+
+
+	border: 0;
+	outline: 0;
+	box-shadow: inset -1px -1px 2px var(--base-color-2), inset -1px -1px 2px var(--base-color);
+}
+
+div.op-top button,
+div.op-left button {
+	filter: brightness(.9);
+}
+
+button#eval {
+	background-color: orangered;
+}
+
+
+nav {
+	display: flex;
+	width: 100%;
+	height: 2rem;
+	flex-direction: row;
+	gap: .5rem;
+	justify-content: end;
+	align-items: center;
+	border-bottom: .1px solid black;
+}
+
+nav label{
+	cursor: pointer;
+
 }
