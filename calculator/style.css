@@ -79,6 +79,7 @@ time,
 mark,
 audio,
 video {
+	user-select: none;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -101,8 +102,17 @@ section {
 	display: block;
 }
 
+:root {
+	--test: oklab(100% 0 -0.00011);
+	--test-2: oklab(62.793% 0.22489 0.1258);
+	--base-color: rgb(224, 217, 212);
+	--base-color-2: rgb(180, 176, 173);
+}
+
+
 body {
 	line-height: 1;
+	background-color: rgb(from rgb(238, 139, 139) calc(r) calc());
 }
 
 ol,
@@ -121,6 +131,7 @@ q:before,
 q:after {
 	content: '';
 	content: none;
+
 }
 
 table {
@@ -129,27 +140,82 @@ table {
 }
 
 
-:root {
-	--base-color: rgb(224, 217, 212);
-	--base-color-2: rgb(180, 176, 173);
-}
 
 body {
 	font-size: 11.3px;
 	background-color: var(--base-color);
-
+	background-color: #f4f4f4;
 }
 
 
 .container {
+	max-width: 360px;
+	min-height: calc(100% + 0px);
+	margin: 0 auto;
+	display: grid;
+	height: 100vh;
+	grid-template-rows: 1rem calc(100vh - 1rem);
+}
+
+.container header {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
 
 }
 
+
+
+
+nav {
+
+	display: flex;
+	width: 100%;
+	height: 1rem;
+
+
+	flex-direction: row;
+	justify-content: end;
+	align-items: center;
+}
+
+nav label {
+	height: in;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	font-family: Arial, Helvetica, sans-serif;
+
+	height: 100%;
+	padding: 0 .5rem;
+}
+
+nav label:last-child {
+	margin-right: 1rem;
+}
+
+nav label:hover {
+	background-color: black;
+	color: white;
+	box-sizing: border-box;
+	filter: brightness(.7);
+}
+
+/* main */
+.container main {
+	width: 100%;
+	height: 100%;
+
+	background-color: rgb(187, 119, 119);
+	display: grid;
+	grid-template-rows: 3fr 7fr;
+	background-color: blue;
+}
+
 input#extends-calc {
-    position: absolute;
-    opacity: 0; 
-    pointer-events: none;
-    z-index: -1;
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	z-index: -1;
 }
 
 input#extends-calc:checked~section[role="input"] {
@@ -165,7 +231,8 @@ input#extends-calc:checked~section[role="input"] {
 		"sym-r num num num op-left";
 }
 
-input#extends-calc:not(:checked)~section[role="input"] div.sym-t, input#extends-calc:not(:checked)~section[role="input"] div.sym-r {
+input#extends-calc:not(:checked)~section[role="input"] div.sym-t,
+input#extends-calc:not(:checked)~section[role="input"] div.sym-r {
 	display: none;
 }
 
@@ -174,11 +241,9 @@ input#extends-calc:not(:checked)~section[role="input"] div.sym-t, input#extends-
 
 section[role="input"] {
 	width: 100%;
-	height: 64vh;
+	height: 100%;
 
-	position: fixed;
-	bottom: 0;
-	left: 0;
+
 	display: grid;
 
 	grid-template-columns: repeat(4, 1fr);
@@ -234,11 +299,20 @@ div.op-top {
 section[role="input"] button {
 	box-sizing: border-box;
 
-
-
-	border: 0;
+	border: solid rgba(12, 23, 34, .3) 1px;
 	outline: 0;
 	box-shadow: inset -1px -1px 2px var(--base-color-2), inset -1px -1px 2px var(--base-color);
+}
+
+section[role="input"] button:hover {
+	outline: solid black 1px;
+	cursor: pointer;
+	filter: brightness(.7);
+}
+
+section[role="input"] button:active {
+	background-color: rgb(31, 31, 31);
+	color: white;
 }
 
 div.op-top button,
@@ -250,19 +324,39 @@ button#eval {
 	background-color: orangered;
 }
 
-
-nav {
-	display: flex;
-	width: 100%;
-	height: 2rem;
-	flex-direction: row;
-	gap: .5rem;
-	justify-content: end;
-	align-items: center;
-	border-bottom: .1px solid black;
+button[role="AC"] {
+	box-shadow: 0;
+	background-color: rgb(206, 24, 0);
+	color: white;
 }
 
-nav label{
-	cursor: pointer;
+button[role="DEL"] {
+	box-shadow: 0;
+	background-color: rgb(117, 117, 117);
+	color: #f4f4f4;
+}
 
+
+section[role="output"] {
+	box-sizing: border-box;
+	border-top: solid black 1px;
+	border-bottom: solid black 1px;
+	display: flex;
+}
+
+section[role="output"] input:valid {
+	outline: 0;
+	border: 0;
+
+}
+
+section[role="output"] input {
+	box-sizing: border-box;
+	padding: 1rem;
+
+	font-size: 8vh;
+	color: rgb(185, 178, 178);
+	border: 0;
+	width: 100%;
+	background-color: rgb(20, 20, 20);
 }

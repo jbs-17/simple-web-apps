@@ -29,18 +29,20 @@
     <header>
       <nav>
         <label for="extends-calc">
-          EXTENDS
+          EXPANDS
         </label>
         <label for="main-menu">MENU</label>
         <label for="unit-converter-menu">UNIT CONVERTER</label>
+        <label for="unit-converter-menu">SETTINGS</label>
       </nav>
     </header>
-    <main>
-      
+
+    <main>  
       <section role="output">
+        <input value="99" readonly style="resize: none;" type="text"></input>
       </section>
       
-      <input type="checkbox" id="extends-calc">
+      <input hidden style="display: none;" type="checkbox" id="extends-calc">
       <section role="input">
         <div class="sym-t">
           <button>sin</button>
@@ -66,9 +68,9 @@
         </div>
 
         <div class="op-top">
-          <button>AC</button>
+          <button role="AC">AC</button>
+          <button role="DEL">DEL</button>
           <button>%</button>
-          <button>DEL</button>
         </div>
 
         <div class="op-left">
@@ -89,17 +91,14 @@
           <button role="num">7</button>
           <button role="num">8</button>
           <button role="num">9</button>
-          <button role="num">0</button>
-          <button role="num">00</button>
+          <button role="num" value="0">0</button>
+          <button role="num" value="00">00</button>
           <button role="num">.</button>
         </div>
 
       </section>
 
     </main>
-    <footer>
-
-    </footer>
 
   </div>
 
